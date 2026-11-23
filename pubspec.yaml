@@ -1,0 +1,25 @@
+name: iztro_dart
+description: >-
+  Pure Dart Ziwei Doushu (Purple Star Astrology) calculation engine ported from
+  iztro v2.6.5, with pluggable lunar calendar, true solar time, and LLM DSL.
+version: 0.1.0
+repository: https://github.com/tihonovaaybeniz-code/iztro_dart
+homepage: https://github.com/tihonovaaybeniz-code/iztro_dart
+issue_tracker: https://github.com/tihonovaaybeniz-code/iztro_dart/issues
+
+topics:
+  - ziwei
+  - ziweidoushu
+  - astrology
+  - calendar
+  - lunar
+
+environment:
+  sdk: '>=3.5.4 <4.0.0'
+
+dependencies:
+  lunar: ^1.7.9
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.25.0

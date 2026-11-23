@@ -1,0 +1,12 @@
+# Dart / Pub
+.dart_tool/
+build/
+.packages
+pubspec.lock
+coverage/
+
+# Node / Golden fixture tooling
+tool/node_modules/
+
+# OS
+.DS_Store

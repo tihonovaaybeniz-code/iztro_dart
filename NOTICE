@@ -1,0 +1,23 @@
+iztro_dart Attribution & Third-Party Notices
+=============================================
+
+1. Upstream Algorithm Reference
+   - Project: iztro (https://github.com/SylarLong/iztro)
+   - Baseline Version: v2.6.5
+   - License: MIT License
+   - Copyright (c) 2023 All Contributors (@SylarLong/iztro)
+
+   Core Ziwei Doushu placement rules, palace indexing, mutagen tables,
+   brightness tables, horoscope calculations, chainable query semantics, and
+   multi-language terminology dictionaries in iztro_dart are ported from
+   SylarLong/iztro v2.6.5.
+
+2. Default Lunar Calendar Engine
+   - Package: lunar (https://pub.dev/packages/lunar / https://github.com/6tail/lunar-flutter)
+   - License: MIT License
+   - Copyright (c) 6tail
+
+   Used by DefaultLunarAdapter to provide pure Dart Gregorian/Lunar calendar
+   and solar-term stem/branch calculations aligned with upstream lunar-lite and
+   lunar-typescript. Custom host calendar engines can be injected via
+   LunarCalendarAdapter.
