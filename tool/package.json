@@ -1,0 +1,8 @@
+{
+  "name": "iztro-dart-golden-generator",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "iztro": "2.6.5"
+  }
+}
