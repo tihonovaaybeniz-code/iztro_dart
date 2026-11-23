@@ -25,10 +25,12 @@ export 'src/data/stars_meta.dart';
 export 'src/data/stems_table.dart';
 export 'src/llm/chart_dsl.dart';
 export 'src/llm/compact_dsl.dart';
+export 'src/llm/followup_prompt.dart';
 export 'src/llm/pattern_detector.dart';
 export 'src/llm/prompt_builder.dart';
 export 'src/llm/reading_models.dart';
+export 'src/llm/zeji_prompt.dart';
 export 'src/star/functional_star.dart';
 
 /// Package semantic version baseline.
-const String iztroDartVersion = '0.2.0';
+const String iztroDartVersion = '0.3.0';

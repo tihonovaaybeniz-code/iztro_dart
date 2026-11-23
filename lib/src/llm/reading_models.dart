@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'followup_prompt.dart';
+import 'zeji_prompt.dart';
+
 /// Structured hero overview reading matching host UI `ZiweiHeroReading` cards.
 class ZiweiHeroReadingPayload {
   const ZiweiHeroReadingPayload({
@@ -287,6 +290,59 @@ abstract final class ZiweiLlmResponseParser {
       fallbackYearGanZhi: yearGanZhi,
     );
     if (payload.headline.isEmpty || payload.opportunities.isEmpty) {
+      return null;
+    }
+    return payload;
+  }
+
+  /// Parses raw LLM text into a [ZiweiFollowupAnswerPayload], or `null` if
+  /// missing core summary/analysis.
+  static ZiweiFollowupAnswerPayload? parseFollowupAnswer(
+    String raw, {
+    String fallbackQuestionId = '',
+    String fallbackQuestionTitle = '',
+  }) {
+    final map = extractJsonObject(
+      raw,
+      requiredKeys: const ['summary', 'analysis', 'actionSteps'],
+    );
+    if (map == null) {
+      return null;
+    }
+    final payload = ZiweiFollowupAnswerPayload.fromJson(
+      map,
+      fallbackQuestionId: fallbackQuestionId,
+      fallbackQuestionTitle: fallbackQuestionTitle,
+    );
+    if (payload.summary.isEmpty || payload.analysis.isEmpty) {
+      return null;
+    }
+    return payload;
+  }
+
+  /// Parses raw LLM text into a [ZejiRecommendationPayload], or `null` if
+  /// missing headline/bestDate/topPicks.
+  static ZejiRecommendationPayload? parseZejiRecommendation(
+    String raw, {
+    String fallbackEventWord = '',
+  }) {
+    final map = extractJsonObject(
+      raw,
+      requiredKeys: const [
+        'headline',
+        'bestDate',
+        'bestDateSummary',
+        'topPicks'
+      ],
+    );
+    if (map == null) {
+      return null;
+    }
+    final payload = ZejiRecommendationPayload.fromJson(
+      map,
+      fallbackEventWord: fallbackEventWord,
+    );
+    if (payload.bestDate.isEmpty || payload.topPicks.isEmpty) {
       return null;
     }
     return payload;

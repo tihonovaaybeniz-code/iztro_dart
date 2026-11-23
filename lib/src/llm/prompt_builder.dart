@@ -12,7 +12,9 @@ enum ZiweiPromptScene {
   palace('palace'),
   yearly('yearly'),
   careerWealth('careerWealth'),
-  relationship('relationship');
+  relationship('relationship'),
+  followup('followup'),
+  zeji('zeji');
 
   const ZiweiPromptScene(this.key);
 
@@ -316,6 +318,13 @@ abstract final class ZiweiPromptBuilder {
           format: format,
           extraInstructions: '请特别结合夫妻宫、福德宫与迁移宫的情绪互动模式与伴侣相处建议来展开。'
               '${extraInstructions != null ? " $extraInstructions" : ""}',
+        ),
+      ZiweiPromptScene.followup ||
+      ZiweiPromptScene.zeji =>
+        throw ArgumentError.value(
+          scene,
+          'scene',
+          'Use ZiweiFollowupPromptBuilder or ZejiPromptBuilder for followup/zeji scenes.',
         ),
     };
   }

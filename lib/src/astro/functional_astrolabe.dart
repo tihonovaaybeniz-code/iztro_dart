@@ -8,6 +8,7 @@ import '../data/locales/locale_registry.dart';
 import '../data/stars_meta.dart';
 import '../llm/chart_dsl.dart';
 import '../llm/compact_dsl.dart';
+import '../llm/followup_prompt.dart';
 import '../llm/prompt_builder.dart';
 import '../star/functional_star.dart';
 import '../star/horoscope_star.dart';
@@ -740,6 +741,23 @@ class FunctionalAstrolabe {
   }) =>
       ZiweiPromptBuilder.buildYearlyPrompt(
         this,
+        targetDate: targetDate,
+        timeIndex: timeIndex,
+        format: format,
+        extraInstructions: extraInstructions,
+      );
+
+  /// Builds a fixed prompt for a whitelisted preset [ZiweiFollowupQuestion].
+  ZiweiLlmPrompt buildFollowupPrompt(
+    ZiweiFollowupQuestion question, {
+    DateTime? targetDate,
+    int? timeIndex,
+    ZiweiDslFormat format = ZiweiDslFormat.compactText,
+    String? extraInstructions,
+  }) =>
+      ZiweiFollowupPromptBuilder.build(
+        this,
+        question,
         targetDate: targetDate,
         timeIndex: timeIndex,
         format: format,

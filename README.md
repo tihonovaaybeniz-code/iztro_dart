@@ -33,7 +33,7 @@ dependencies:
   iztro_dart:
     git:
       url: https://github.com/tihonovaaybeniz-code/iztro_dart.git
-      ref: v0.2.0
+      ref: v0.3.0
 ```
 
 ---

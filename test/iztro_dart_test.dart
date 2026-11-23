@@ -3,6 +3,6 @@ import 'package:test/test.dart';
 
 void main() {
   test('exposes package version baseline', () {
-    expect(iztroDartVersion, '0.2.0');
+    expect(iztroDartVersion, '0.3.0');
   });
 }
