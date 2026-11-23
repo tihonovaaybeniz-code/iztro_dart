@@ -4,7 +4,11 @@ library;
 
 export 'src/astro/astro.dart';
 export 'src/astro/functional_astrolabe.dart';
+export 'src/astro/functional_flanking_palaces.dart';
+export 'src/astro/functional_horoscope.dart';
 export 'src/astro/functional_palace.dart';
+export 'src/astro/functional_surpalaces.dart';
+export 'src/astro/horoscope_calc.dart';
 export 'src/astro/palace_calc.dart';
 export 'src/calendar/calendar_adapter.dart';
 export 'src/calendar/day_boundary.dart';
@@ -19,6 +23,8 @@ export 'src/data/brightness_table.dart';
 export 'src/data/locales/locale_registry.dart';
 export 'src/data/stars_meta.dart';
 export 'src/data/stems_table.dart';
+export 'src/llm/chart_dsl.dart';
+export 'src/llm/pattern_detector.dart';
 export 'src/star/functional_star.dart';
 
 /// Package semantic version baseline.

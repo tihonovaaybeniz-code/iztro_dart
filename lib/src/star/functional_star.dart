@@ -1,5 +1,6 @@
 import '../astro/functional_astrolabe.dart';
 import '../astro/functional_palace.dart';
+import '../astro/functional_surpalaces.dart';
 import '../core/types.dart';
 import '../data/locales/locale_registry.dart';
 
@@ -67,6 +68,16 @@ class FunctionalStar {
       return null;
     }
     return a.palace((p.index + 6) % 12);
+  }
+
+  /// Returns the surrounded palaces (三方四正) of this star's palace, if bound.
+  FunctionalSurpalaces? surroundedPalaces() {
+    final p = _palace;
+    final a = _astrolabe;
+    if (p == null || a == null) {
+      return null;
+    }
+    return a.surroundedPalaces(p.index);
   }
 
   /// Returns `true` if [brightness] matches any item in [brightnesses].
