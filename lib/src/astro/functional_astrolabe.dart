@@ -7,6 +7,8 @@ import '../core/validation.dart';
 import '../data/locales/locale_registry.dart';
 import '../data/stars_meta.dart';
 import '../llm/chart_dsl.dart';
+import '../llm/compact_dsl.dart';
+import '../llm/prompt_builder.dart';
 import '../star/functional_star.dart';
 import '../star/horoscope_star.dart';
 import '../star/yearly12_star.dart';
@@ -682,6 +684,66 @@ class FunctionalAstrolabe {
         targetDate: targetDate,
         timeIndex: timeIndex,
         focusPalaces: focusPalaces,
+      );
+
+  /// Generates a token-efficient plain-text Chart DSL for LLM prompts.
+  String toCompactDsl({
+    DateTime? targetDate,
+    int? timeIndex,
+    List<PalaceName>? focusPalaces,
+  }) =>
+      ChartCompactDsl.render(
+        this,
+        targetDate: targetDate,
+        timeIndex: timeIndex,
+        focusPalaces: focusPalaces,
+      );
+
+  /// Builds a fixed anti-hallucination prompt for an overall hero reading.
+  ZiweiLlmPrompt buildHeroPrompt({
+    DateTime? targetDate,
+    int? timeIndex,
+    ZiweiDslFormat format = ZiweiDslFormat.compactText,
+    String? extraInstructions,
+  }) =>
+      ZiweiPromptBuilder.buildHeroPrompt(
+        this,
+        targetDate: targetDate,
+        timeIndex: timeIndex,
+        format: format,
+        extraInstructions: extraInstructions,
+      );
+
+  /// Builds a fixed anti-hallucination prompt for a single [focusPalace].
+  ZiweiLlmPrompt buildPalacePrompt(
+    PalaceName focusPalace, {
+    DateTime? targetDate,
+    int? timeIndex,
+    ZiweiDslFormat format = ZiweiDslFormat.compactText,
+    String? extraInstructions,
+  }) =>
+      ZiweiPromptBuilder.buildPalacePrompt(
+        this,
+        focusPalace,
+        targetDate: targetDate,
+        timeIndex: timeIndex,
+        format: format,
+        extraInstructions: extraInstructions,
+      );
+
+  /// Builds a fixed anti-hallucination prompt for yearly fortune analysis.
+  ZiweiLlmPrompt buildYearlyPrompt({
+    DateTime? targetDate,
+    int? timeIndex,
+    ZiweiDslFormat format = ZiweiDslFormat.compactText,
+    String? extraInstructions,
+  }) =>
+      ZiweiPromptBuilder.buildYearlyPrompt(
+        this,
+        targetDate: targetDate,
+        timeIndex: timeIndex,
+        format: format,
+        extraInstructions: extraInstructions,
       );
 
   /// Serializes the astrolabe to an `iztro`-compatible plain JSON map.

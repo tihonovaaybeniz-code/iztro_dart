@@ -33,7 +33,7 @@ dependencies:
   iztro_dart:
     git:
       url: https://github.com/tihonovaaybeniz-code/iztro_dart.git
-      ref: v0.1.0
+      ref: v0.2.0
 ```
 
 ---
@@ -125,15 +125,29 @@ final class MyHostCalendarAdapter extends BaseLunarCalendarAdapter {
 }
 ```
 
-### 5. LLM Chart DSL 与格局预检 / LLM Integration
+### 5. LLM Chart DSL、固定提示词模板与响应解析 / LLM Integration
 
 ```dart
+// 结构化 JSON DSL 或高密度紧凑文本 DSL（节省约 40%–60% 输入 Token）
 final dsl = chart.toLlmJson(
   targetDate: DateTime.now(),
   focusPalaces: const [PalaceName.soul, PalaceName.career],
 );
+final compactText = chart.toCompactDsl(focusPalaces: const [PalaceName.soul]);
 
-// 包含 meta.fingerprint, palaces[12]（空宫借星/三方四正/飞星/自化）, activeHoroscope, detectedPatterns
+// 开箱即用的防幻觉固定 Prompt（支持命格总览 / 单宫四段详批 / 流年运势 / 事业财富 / 感情婚姻）
+final heroPrompt = chart.buildHeroPrompt();
+final palacePrompt = chart.buildPalacePrompt(PalaceName.career);
+final yearlyPrompt = chart.buildYearlyPrompt(targetDate: DateTime(2026, 5, 1));
+
+// 发送 heroPrompt.toOpenAiMessages() 到任意大模型后，容错解析回结构化对象
+final heroReading = ZiweiLlmResponseParser.parseHeroReading(rawModelOutput);
+final palaceReading = ZiweiLlmResponseParser.parsePalaceReading(
+  rawPalaceOutput,
+  fallbackPalaceName: '官禄',
+);
+
+// 规则引擎预检经典格局与破格因素
 final patterns = PatternDetector.detect(chart);
 for (final p in patterns) {
   print('${p.name} (成格=${p.isClean}, 破格因素=${p.breakFactors})');
